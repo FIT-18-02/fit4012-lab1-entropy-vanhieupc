@@ -21,9 +21,21 @@ int mod_inverse(int a, int m) {
     int x, y;
     int g = extended_gcd(a, m, x, y);
 
-    if (g != 1) {
-        return -1;
-    }
+    if (g != 1) return -1;
 
     return (x % m + m) % m;
+}
+
+int main() {
+    int a, m;
+    cin >> a >> m;
+
+    int result = mod_inverse(a, m);
+
+    if (result == -1)
+        cout << "Khong ton tai" << endl;
+    else
+        cout << result << endl;
+
+    return 0;
 }
