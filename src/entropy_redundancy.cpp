@@ -1,38 +1,47 @@
 #include <iostream>
-#include <map>
 #include <string>
+#include <map>
 #include <cmath>
+
 using namespace std;
 
-double entropy(string s) {
+// Tính entropy Shannon
+double calculate_entropy(const string &text) {
+    if (text.empty()) return 0.0;
+
     map<char, int> freq;
 
-    for (char c : s) {
+    for (char c : text) {
         freq[c]++;
     }
 
-    double h = 0.0;
-    int n = s.size();
+    double entropy = 0.0;
+    int n = text.length();
 
-    for (auto &p : freq) {
-        double p_i = (double)p.second / n;
-        h -= p_i * log2(p_i);
+    for (auto pair : freq) {
+        double p = (double)pair.second / n;
+        entropy -= p * log2(p);
     }
 
-    return h;
+    return entropy;
 }
 
-double redundancy(string s) {
-    double h = entropy(s);
-    double h_max = log2(s.size());
-    return h_max - h;
+// Tính redundancy
+double calculate_redundancy(const string &text, int alphabet_size = 256) {
+    if (text.empty()) return 0.0;
+
+    double hmax = log2(alphabet_size);
+    double h = calculate_entropy(text);
+
+    return 1.0 - (h / hmax);
 }
 
 int main() {
-    string s = "aaaa";
+    string text;
+    getline(cin, text);
 
-    cout << entropy(s) << endl;
-    cout << redundancy(s) << endl;
+    cout << "Entropy: " << calculate_entropy(text) << endl;
+    cout << "Redundancy: " << calculate_redundancy(text) << endl;
 
     return 0;
 }
