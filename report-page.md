@@ -1,7 +1,7 @@
 # Report 1 Page – FIT4012 Lab 1
 
 ## 1. Mục tiêu
-Tóm tắt ngắn gọn mục tiêu của bài lab.
+Tìm hiểu cách tính entropy và redundancy của chuỗi dữ liệu, đồng thời cài đặt và kiểm tra thuật toán modulo inverse trong lập trình.
 
 ## 2. Cách làm
 - Đọc hiểu chương trình entropy mẫu.
@@ -13,9 +13,9 @@ Tóm tắt ngắn gọn mục tiêu của bài lab.
 ### 3.1 Entropy và redundancy
 | Input | Entropy | Redundancy | Nhận xét |
 |---|---:|---:|---|
-| aaaa | 0 | 0 | Chuỗi không có thông tin |
-| abcd | 1 | 0 | Ký tự phân bố đều |
-| hello world | 2 | 0 | Chuỗi có khoảng trắng và ký tự lặp |
+| aaaa | 0 | 1.00 | Chuỗi lặp hoàn toàn → không có thông tin mới |
+| abcd | 2.00 | 0.00 | Phân bố đều → thông tin tối đa |
+| hello world | ≈ 2.85 | ≈ 0.05 | Có lặp lại nhưng vẫn khá đa dạng |
 
 ### 3.2 Modulo inverse
 | a | m | Kết quả mong đợi | Kết quả chương trình |
@@ -25,9 +25,7 @@ Tóm tắt ngắn gọn mục tiêu của bài lab.
 | 6 | 9 | Không tồn tại | Không tồn tại |
 
 ## 4. Kết luận
-Dưới đây là **một bản kết luận khác (ngắn gọn, dễ pass)**:
 
----
+Qua bài lab, em đã hiểu cách áp dụng lý thuyết entropy để đánh giá mức độ thông tin trong chuỗi ký tự và cách cài đặt hàm nghịch đảo modulo bằng Euclid mở rộng.
 
-## 4. Kết luận
-Qua bài lab, em đã hiểu cách đo lường entropy và redundancy của chuỗi ký tự cũng như cách cài đặt hàm modulo inverse. Em gặp khó khăn khi xử lý trường hợp không tồn tại nghịch đảo modulo nhưng đã hiểu rõ hơn sau khi chạy nhiều test case. Bài lab giúp em cải thiện kỹ năng lập trình và kiểm tra thuật toán một cách chính xác hơn.
+Bài lab giúp em nhận ra tầm quan trọng của việc kiểm thử nhiều trường hợp khác nhau để đảm bảo kết quả chính xác. Đồng thời, em cũng cải thiện được kỹ năng lập trình và tư duy xử lý các bài toán số học cơ bản.
