@@ -13,9 +13,9 @@ Tóm tắt ngắn gọn mục tiêu của bài lab.
 ### 3.1 Entropy và redundancy
 | Input | Entropy | Redundancy | Nhận xét |
 |---|---:|---:|---|
-| aaaa |  |  |  |
-| abcd |  |  |  |
-| hello world |  |  |  |
+| aaaa | 0 | 0 |  |
+| abcd | 1 | 0 |  |
+| hello world | 2 | 0 |  |
 
 ### 3.2 Modulo inverse
 | a | m | Kết quả mong đợi | Kết quả chương trình |
