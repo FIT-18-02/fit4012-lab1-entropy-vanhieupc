@@ -1,30 +1,38 @@
 #include <iostream>
 #include <map>
+#include <string>
 #include <cmath>
 using namespace std;
 
-double calculate_entropy(string s) {
+double entropy(string s) {
     map<char, int> freq;
-    for (char c : s) freq[c]++;
 
-    double H = 0.0;
-    int n = s.size();
-
-    for (auto p : freq) {
-        double prob = (double)p.second / n;
-        H -= prob * log2(prob);
+    for (char c : s) {
+        freq[c]++;
     }
 
-    return H;
+    double h = 0.0;
+    int n = s.size();
+
+    for (auto &p : freq) {
+        double p_i = (double)p.second / n;
+        h -= p_i * log2(p_i);
+    }
+
+    return h;
 }
 
-double calculate_redundancy(string s) {
-    double H = calculate_entropy(s);
+double redundancy(string s) {
+    double h = entropy(s);
+    double h_max = log2(s.size());
+    return h_max - h;
+}
 
-    int unique = map<char,int>(s.begin(), s.end()).size();
-    double Hmax = log2(unique);
+int main() {
+    string s = "aaaa";
 
-    if (Hmax == 0) return 0;
+    cout << entropy(s) << endl;
+    cout << redundancy(s) << endl;
 
-    return 1 - (H / Hmax);
+    return 0;
 }
