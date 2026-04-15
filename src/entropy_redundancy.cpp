@@ -1,10 +1,15 @@
 #include <iostream>
 #include <map>
 #include <cmath>
+#include <string>
+
 using namespace std;
 
 double calculate_entropy(string text) {
+    if (text.empty()) return 0;
+
     map<char, int> freq;
+
     for (char c : text) {
         freq[c]++;
     }
@@ -21,16 +26,29 @@ double calculate_entropy(string text) {
 }
 
 double calculate_redundancy(string text) {
+    if (text.empty()) return 0;
+
+    map<char, int> freq;
+
+    for (char c : text) {
+        freq[c]++;
+    }
+
+    int unique = freq.size();
+
+    if (unique <= 1) return 0;
+
     double entropy = calculate_entropy(text);
-    double max_entropy = log2(256); // ASCII = 8
-    return max_entropy - entropy;
+    double max_entropy = log2(unique);
+
+    return 1 - (entropy / max_entropy);
 }
 
 int main() {
     string text;
 
     cout << "Nhap chuoi: ";
-    cin >> text;
+    getline(cin, text);
 
     double entropy = calculate_entropy(text);
     double redundancy = calculate_redundancy(text);
