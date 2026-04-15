@@ -1,60 +1,30 @@
 #include <iostream>
 #include <map>
 #include <cmath>
-#include <string>
-
 using namespace std;
 
-double calculate_entropy(string text) {
-    if (text.empty()) return 0;
-
+double calculate_entropy(string s) {
     map<char, int> freq;
+    for (char c : s) freq[c]++;
 
-    for (char c : text) {
-        freq[c]++;
+    double H = 0.0;
+    int n = s.size();
+
+    for (auto p : freq) {
+        double prob = (double)p.second / n;
+        H -= prob * log2(prob);
     }
 
-    double entropy = 0.0;
-    int len = text.length();
-
-    for (auto pair : freq) {
-        double p = (double)pair.second / len;
-        entropy -= p * log2(p);
-    }
-
-    return entropy;
+    return H;
 }
 
-double calculate_redundancy(string text) {
-    if (text.empty()) return 0;
+double calculate_redundancy(string s) {
+    double H = calculate_entropy(s);
 
-    map<char, int> freq;
+    int unique = map<char,int>(s.begin(), s.end()).size();
+    double Hmax = log2(unique);
 
-    for (char c : text) {
-        freq[c]++;
-    }
+    if (Hmax == 0) return 0;
 
-    int unique = freq.size();
-
-    if (unique <= 1) return 0;
-
-    double entropy = calculate_entropy(text);
-    double max_entropy = log2(unique);
-
-    return 1 - (entropy / max_entropy);
-}
-
-int main() {
-    string text;
-
-    cout << "Nhap chuoi: ";
-    getline(cin, text);
-
-    double entropy = calculate_entropy(text);
-    double redundancy = calculate_redundancy(text);
-
-    cout << "Entropy: " << entropy << endl;
-    cout << "Redundancy: " << redundancy << endl;
-
-    return 0;
+    return 1 - (H / Hmax);
 }
